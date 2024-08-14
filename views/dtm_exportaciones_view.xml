@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="dtm_exportaciones_action" model="ir.actions.act_window">
+            <field name="name">Exportaciones</field>
+            <field name="res_model">dtm.exportaciones</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <record id="dtm_exportaciones_tree" model="ir.ui.view">
+            <field name="name">dtm.exportaciones.tree</field>
+            <field name="model">dtm.exportaciones</field>
+            <field name="arch" type="xml">
+                <tree  >
+                    <field name="no_cotizacion"/>
+                    <field name="proveedor"/>
+                    <field name="cliente" />
+                    <field name="order_compra"/>
+                    <field name="fecha_entrada" widget="date"/>
+                    <field name="fecha_salida" widget="date"/>
+                    <field name="precio_total"/>
+                    <field name="currency"/>
+<!--                    <field name="packing_list"/>-->
+                </tree>
+            </field>
+        </record>
+
+        <record id="dtm_exportaciones_form" model="ir.ui.view">
+            <field name="name">dtm.exportaciones.form</field>
+            <field name="model">dtm.exportaciones</field>
+            <field name="arch" type="xml">
+                <form>
+                    <div >
+                        <h2 style="text-align: right;">
+                            <field name="no_cotizacion"/>
+                        </h2>
+                    </div>
+                    <group>
+                        <field name="proveedor"/>
+                        <field name="cliente" />
+                        <field name="order_compra"/>
+                        <field name="fecha_entrada" widget="date"/>
+                        <field name="fecha_salida" widget="date"/>
+                        <field name="precio_total"/>
+                        <field name="currency"/>
+                        <field name="peso"/>
+                        <field name="packing_list" widget="document_file"/>
+                        <field name="foto" widget="image_gallery"/>
+                    </group>
+                    <group>
+
+                    </group>
+                    <notebook>
+                        <page string="Ordenes de Trabajo">
+                            <field name="odt_ids">
+                                <tree>
+                                    <field name="item"/>
+                                    <field name="cantidad"/>
+                                    <field name="precio_unitario"/>
+                                    <field name="precio_total"/>
+                                    <field name="orden_trabajo"/>
+                                </tree>
+
+                            </field>
+                        </page>
+                        <page string="Planos">
+                            <field name="planos_id">
+                                <tree>
+                                    <field name="nombre"/>
+                                    <field name="archivo"/>
+                                    <field name="orden"/>
+                                </tree>
+                                <form>
+                                    <group >
+                                        <field name="archivo" filename="nombre" widget="pdf_viewer"></field>
+                                        <field name="nombre" invisible="1"></field>
+                                    </group>
+                                </form>
+
+                            </field>
+                        </page>
+                        <page string="Notas">
+                            <field name="notas"/>
+                        </page>
+                    </notebook>
+
+                </form>
+            </field>
+        </record>
+
+        <menuitem id="exportaciones_action_menu" action="dtm_exportaciones.dtm_exportaciones_action"/>
+    </data>
+</odoo>
